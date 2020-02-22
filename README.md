@@ -1,4 +1,4 @@
-latex-homework-template
+latex-homework-template-chinese
 =======================
 
 这是一份我自用的LaTeX作业模板, 修改和汉化自
