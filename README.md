@@ -1,59 +1,53 @@
 latex-homework-template
 =======================
 
-The LaTeX file that I use as the base for all my homeworks in university.
+这是一份我自用的LaTeX作业模板, 修改和汉化自
+https://github.com/jdavis/latex-homework-template
 
-## Features
+## 特性
 
-Here are just a few features of this homework template.
+1. 标题页
+2. 代码高亮
+3. 可调的题号
+4. 常用数学宏
 
-1. Title page.
-2. Problem markers.
-3. Configurable problem numbers (see the last 3 problems for an example).
-4. Some commonly used math macros.
+## 截图
 
-## Screenshots
-
-### The Cover Page:
+### 封面:
 
 ![Cover page](/images/latex1.png)
 
-### Big Oh Example Problem:
+### 例子 1 :
 ![Example problems 1](/images/latex2.png)
 
-### Automata & Pseudocode Problems:
+### 例子 2: 自动机, 伪代码, 代码高亮
 ![Example problems 2](/images/latex3.png)
 
-### Statistics Problem:
+### 例子 3: 统计学
 ![Example problems 3](/images/latex4.png)
 
-### Proof Problem:
+### 例子 4: 证明题
 ![Example problems 4](/images/latex5.png)
 
-### Adjustable Problem Numbers
+### 例子 5: 可调节的题号
 ![Example problem numbering](/images/latex6.png)
 
-## Installing
+## 安装
 
-1. First you'll need LaTeX. Instructions on obtaining it can be found here:
-   http://latex-project.org/ftp.html
-2. Compiling from the command line will look like the following:
+需要安装xelatex,Python3以及pygments包
 
-   ```bash
-   $ latexmk homework.tex
-   ```
-3. Or you can use [TeXShop][texshop] or a similar native client to typeset the
-   LaTeX file.
+```latex
 
-## Credit
+xelatex -shell-escape homework.tex
 
-When first starting with LaTeX, I came across [this template][credit] and used
-it as a base for starting my template. As you can see, it is pretty similar.
+```
+
+## 感谢
+
+感谢英文版本原作者jdavis.
+
 
 ## License
 
 This code is distributed under the MIT license. For more info, read the
 [LICENSE](/LICENSE) file distributed with the source code.
-
-[texshop]: http://pages.uoregon.edu/koch/texshop/
-[credit]: http://www.latextemplates.com/template/programming-coding-assignment

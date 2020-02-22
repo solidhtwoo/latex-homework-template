@@ -9,6 +9,7 @@
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
 \usepackage{datetime}
+\usepackage{minted}
 \usetikzlibrary{automata,positioning}
 
 %
@@ -41,12 +42,12 @@
 %
 
 \newcommand{\enterProblemHeader}[1]{
-    \nobreak\extramarks{}{题目 \arabic{#1} continued on next page\ldots}\nobreak{}
-    \nobreak\extramarks{题目 \arabic{#1} (continued)}{题目 \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{}{题目 \arabic{#1} 续下页}\nobreak{}
+    \nobreak\extramarks{题目 \arabic{#1} (continued)}{题目 \arabic{#1} 续下页\ldots}\nobreak{}
 }
 
 \newcommand{\exitProblemHeader}[1]{
-    \nobreak\extramarks{题目 \arabic{#1} (continued)}{题目 \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{题目 \arabic{#1} (continued)}{题目 \arabic{#1} 续下页\ldots}\nobreak{}
     \stepcounter{#1}
     \nobreak\extramarks{题目 \arabic{#1}}{}\nobreak{}
 }
@@ -96,6 +97,7 @@
 %
 % 标题页
 %
+
 
 \title{
     \vspace{2in}
@@ -246,10 +248,8 @@
     \textbf{解释}
     \\
 
-    给出一个二进制表示的数, \(x\).由于我们的状态机只接受两种输入, \(x\) can either become \(x0\) or \(x1\). When a 0 comes
-    into the state machine, it is the same as taking the binary number and
-    multiplying it by two. When a 1 comes into the machine, it is the same as
-    multipying by two and adding one.
+    给出一个二进制表示的数, \(x\).注意到, 我们的状态机只接受两种输入(1或0). 如果新输入的一位是0, 就相当于把数字乘2
+    如果输入是1, 就相当于乘2再加一。
     \\
 
     通过这一点, 我们就可以建立出一个转移表:
@@ -269,14 +269,12 @@
         \end{tabular}
     \end{table}
 
-    Therefore on state \(q_0\) or (\(x \mod 5 = 0\)), a transition line should
-    go to state \(q_0\) for the input 0 and a line should go to state \(q_1\)
-    for input 1. Continuing this gives us the Figure~\ref{fig:multiple5}.
+    然后再考虑 \(q_0\) 或者说 (\(x \mod 5 = 0\))的转移, 输入是0时状态应该还是\(q_0\)，
+    输入 1时状态应该转移到 \(q_1\)。计算下去我们就得到图~\ref{fig:multiple5}.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    写出快速排序算法的一部分 \alg{Quick-Sort($list, start, end$)}
-
+    写出快速排序算法的一部分 \alg{Quick-Sort($list, start, end$)}, 并用C++语言实现。
     \begin{algorithm}[]
         \begin{algorithmic}[1]
             \Function{Quick-Sort}{$list, start, end$}
@@ -290,6 +288,15 @@
         \end{algorithmic}
         \caption{快速排序的开始部分}
     \end{algorithm}
+    \begin{minted}[linenos]{cpp}
+    void QuickSort(std::vector<int> &lst, int left, int right){
+        if (start >= end) return;
+        int mid = (lift + right) >> 1;
+        QuickSort(lst, start, mid - 1);
+        QuickSort(lst, mid, right);
+    }
+    \end{minted}
+
 \end{homeworkProblem}
 
 \pagebreak
@@ -297,20 +304,17 @@
 \begin{homeworkProblem}
     假设我们想要拟合一条过原点的直线, 如,
     \(Y_i = \beta_1 x_i + e_i\) 其中 \(i = 1, \ldots, n\), \(\E [e_i] = 0\),
-     \(\Var [e_i] = \sigma^2_e\) and \(\Cov[e_i, e_j] = 0, \forall i \neq
+     \(\Var [e_i] = \sigma^2_e\) 且 \(\Cov[e_i, e_j] = 0, \forall i \neq
     j\).
     \\
 
-    \part
-
-    Find the least squares esimator for \(\hat{\beta_1}\) for the slope
-    \(\beta_1\).
+    \textbf{\large{第1部分}} \\
+    确定 \(\beta_1\)的最小二乘估计 \(\hat{\beta_1}\) 。
     \\
 
     \solution
 
-    To find the least squares estimator, we should minimize our Residual Sum
-    of Squares, RSS:
+    为了确定\(\beta_1\)的最小二乘估计, 我们应该最小化残差平方和, RSS:
 
     \[
         \begin{split}
@@ -320,7 +324,7 @@
         \end{split}
     \]
 
-    By taking the partial derivative in respect to \(\hat{\beta_1}\), we get:
+    通过对 \(\hat{\beta_1}\)求偏导, 我们得到:
 
     \[
         \pderiv{
@@ -330,7 +334,7 @@
         = 0
     \]
 
-    This gives us:
+    由此得到:
 
     \[
         \begin{split}
@@ -341,7 +345,7 @@
         \end{split}
     \]
 
-    Solving for \(\hat{\beta_1}\) gives the final estimator for \(\beta_1\):
+    解出 \(\hat{\beta_1}\) ，我们就得到\(\beta_1\)的估计:
 
     \[
         \begin{split}
@@ -356,15 +360,14 @@
 
     \pagebreak
 
-    \part
-
-    Calculate the bias and the variance for the estimated slope
+    \textbf{\large{第2部分}} \\
+    计算估计值偏差和方差。
     \(\hat{\beta_1}\).
     \\
 
     \solution
 
-    For the bias, we need to calculate the expected value
+    为了计算偏差， 我们需要先计算期望。
     \(\E[\hat{\beta_1}]\):
 
     \[
@@ -404,11 +407,10 @@
         \end{split}
     \]
 
-    Thus since our estimator's expected value is \(\beta_1\), we can conclude
-    that the bias of our estimator is 0.
+    由于我们的估计值的期望是 \(\beta_1\), 所以偏差是0.
     \\
 
-    For the variance:
+    计算方差:
 
     \[
         \begin{split}
@@ -471,13 +473,13 @@
 
         \[
             \exists c_1 \exists c_2 \forall n \geq n_0,\ {c_1 \cdot g(n) \leq
-            f(n) \leq c_2 \cdot g(n)}
+            f(n) \leq c_2 \cdot g(n)}.
         \]
 
-        对于第一个不等式, 显然它是成立的. 因为无论常数是何值, \(n^k \leq a_kn^k + a_{k - 1}n^{k - 1} +
-        \hdots + a_1n^1 + a_0n^0\) even if \(c_1 = 1\) and \(n_0 = 1\).  
-        这是因为又 \(n^k \leq c_1 \cdot a_kn^k\) 对任意的常数
-        \(c_1\) 和 \(a_k\).
+        对于第一个不等式, 
+        注意到对任意非负的 $a_k$, 总能找到一个$c_1$, 使得\( c_1 n^k \leq a_k n^k\)，
+        所以 \(c_1 n^k \leq a_kn^k + a_{k - 1}n^{k - 1} +
+        \hdots + a_1n^1 + a_0n^0\) 对任意的$a_i, i = 0,1,\cdots k$恒成立。
         \\
 
         对于第二个不等式, 我们可以这样证明:

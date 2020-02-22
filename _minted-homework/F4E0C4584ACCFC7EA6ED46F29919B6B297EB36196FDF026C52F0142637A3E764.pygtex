@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k+kt}{void} \PYG{n+nf}{QuickSort}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZam{}}\PYG{n}{lst}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{left}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{right}\PYG{p}{)\PYGZob{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{start} \PYG{o}{\PYGZgt{}=} \PYG{n}{end}\PYG{p}{)} \PYG{k}{return}\PYG{p}{;}
+        \PYG{k+kt}{int} \PYG{n}{mid} \PYG{o}{=} \PYG{p}{(}\PYG{n}{lift} \PYG{o}{+} \PYG{n}{right}\PYG{p}{)} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{;}
+        \PYG{n}{QuickSort}\PYG{p}{(}\PYG{n}{lst}\PYG{p}{,} \PYG{n}{start}\PYG{p}{,} \PYG{n}{mid} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{n}{QuickSort}\PYG{p}{(}\PYG{n}{lst}\PYG{p}{,} \PYG{n}{mid}\PYG{p}{,} \PYG{n}{right}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+\end{Verbatim}
