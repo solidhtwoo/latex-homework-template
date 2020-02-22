@@ -1,0 +1,14 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: Compile LaTeX document
+        uses: dante-ev/latex-action@master
+        with:
+          root_file: homework.tex
+          extra_system_packages: python-pygments
+          args: -xelatex -latexoption=-shell-escape -latexoption=-file-line-error -latexoption=-interaction=nonstopmode
