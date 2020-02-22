@@ -1,6 +1,7 @@
 latex-homework-template-chinese
 =======================
 
+![Build LaTeX document](https://github.com/solidhtwoo/latex-homework-template-chinese/workflows/Build%20LaTeX%20document/badge.svg?branch=master)
 这是一份我自用的LaTeX作业模板, 修改和汉化自
 https://github.com/jdavis/latex-homework-template
 
