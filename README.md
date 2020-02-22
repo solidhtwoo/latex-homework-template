@@ -47,7 +47,7 @@ xelatex -shell-escape homework.tex
 感谢英文版本原作者jdavis.
 
 
-## License
+## 协议
 
 This code is distributed under the MIT license. For more info, read the
 [LICENSE](/LICENSE) file distributed with the source code.
