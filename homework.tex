@@ -1,5 +1,5 @@
 \documentclass{article}
-
+\usepackage{xeCJK}
 \usepackage{fancyhdr}
 \usepackage{extramarks}
 \usepackage{amsmath}
@@ -8,11 +8,11 @@
 \usepackage{tikz}
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
-
+\usepackage{datetime}
 \usetikzlibrary{automata,positioning}
 
 %
-% Basic Document Settings
+% 基本设置
 %
 
 \topmargin=-0.45in
@@ -25,111 +25,105 @@
 \linespread{1.1}
 
 \pagestyle{fancy}
-\lhead{\hmwkAuthorName}
-\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
-\rhead{\firstxmark}
-\lfoot{\lastxmark}
-\cfoot{\thepage}
+\lhead{\small{\hmwkAuthorName} \\ \small{\hmwkAuthorClass 班}} % 页眉左侧
+\chead{\hmwkClass\ : \hmwkTitle} % 页眉中间
+\rhead{\firstxmark} % 页眉右侧
+\lfoot{\lastxmark} % 页脚左侧
+\cfoot{\thepage}  % 页脚中间
 
-\renewcommand\headrulewidth{0.4pt}
+\renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{0.4pt}
 
 \setlength\parindent{0pt}
 
 %
-% Create Problem Sections
+% 题目相关设置
 %
 
 \newcommand{\enterProblemHeader}[1]{
-    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
-    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{}{题目 \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{题目 \arabic{#1} (continued)}{题目 \arabic{#1} continued on next page\ldots}\nobreak{}
 }
 
 \newcommand{\exitProblemHeader}[1]{
-    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{题目 \arabic{#1} (continued)}{题目 \arabic{#1} continued on next page\ldots}\nobreak{}
     \stepcounter{#1}
-    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+    \nobreak\extramarks{题目 \arabic{#1}}{}\nobreak{}
 }
 
 \setcounter{secnumdepth}{0}
 \newcounter{partCounter}
 \newcounter{homeworkProblemCounter}
 \setcounter{homeworkProblemCounter}{1}
-\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+\nobreak\extramarks{题目 \arabic{homeworkProblemCounter}}{}\nobreak{}
 
 %
 % Homework Problem Environment
-%
-% This environment takes an optional argument. When given, it will adjust the
-% problem counter. This is useful for when the problems given for your
-% assignment aren't sequential. See the last 3 problems of this template for an
-% example.
+% 这个环境有一个可选的参数, 当给出这个参数的时候可以调整题目计数器, 适合用在
+% 题号不连续的情况.例子在最后一页.
 %
 \newenvironment{homeworkProblem}[1][-1]{
     \ifnum#1>0
         \setcounter{homeworkProblemCounter}{#1}
     \fi
-    \section{Problem \arabic{homeworkProblemCounter}}
+    \section{题目 \arabic{homeworkProblemCounter}}
     \setcounter{partCounter}{1}
     \enterProblemHeader{homeworkProblemCounter}
 }{
     \exitProblemHeader{homeworkProblemCounter}
 }
 
-%
-% Homework Details
-%   - Title
-%   - Due date
-%   - Class
-%   - Section/Time
-%   - Instructor
-%   - Author
-%
 
-\newcommand{\hmwkTitle}{Homework\ \#2}
-\newcommand{\hmwkDueDate}{February 12, 2014}
-\newcommand{\hmwkClass}{Calculus}
-\newcommand{\hmwkClassTime}{Section A}
-\newcommand{\hmwkClassInstructor}{Professor Isaac Newton}
-\newcommand{\hmwkAuthorName}{\textbf{Josh Davis} \and \textbf{Davis Josh}}
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日} 
+\renewcommand{\proofname}{证明}
+\renewcommand{\figurename}{图}
+\floatname{algorithm}{算法}
+
+\makeatletter \renewenvironment{proof}[1][\proofname]{\par     \pushQED{\qed}%
+\normalfont \topsep6\p@\@plus6\p@ \labelsep1em\relax     \trivlist     \item[\hskip\labelsep\indent \bfseries #1]\ignorespaces }{%
+\popQED\endtrivlist\@endpefalse } \makeatother
+
+\newcommand{\hmwkTitle}{作业 \ 2}
+\newcommand{\hmwkDueDate}{1919  年 8  月 \ 10  日}
+\newcommand{\hmwkClass}{占卜学}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{}
+\newcommand{\hmwkAuthorID}{114514}
+\newcommand{\hmwkAuthorClass}{计算机 1919}
+\newcommand{\hmwkAuthorName}{李田所}
 
 %
-% Title Page
+% 标题页
 %
 
 \title{
     \vspace{2in}
     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \normalsize\vspace{0.1in}\small{截止时间: \ \hmwkDueDate}\\
     \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
     \vspace{3in}
 }
 
-\author{\hmwkAuthorName}
-\date{}
+\author{ \hmwkAuthorClass 班\\ \hmwkAuthorName \\ 学号: \hmwkAuthorID }
+\date{\today}
 
-\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
-
-%
-% Various Helper Commands
-%
-
-% Useful for algorithms
+% 算法
 \newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
 
-% For derivatives
+% 导数
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 
-% For partial derivatives
+% 偏导数
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
 
-% Integral dx
+% dx(微积分)
 \newcommand{\dx}{\mathrm{d}x}
 
-% Alias for the Solution section header
-\newcommand{\solution}{\textbf{\large Solution}}
+\newcommand{\solution}{\textbf{\large 解:}}
+\newcommand{\pf}{\textbf{\large 证明:}}
 
-% Probability commands: Expectation, Variance, Covariance, Bias
+% 概率: 期望, 方差, 协方差, 偏差
 \newcommand{\E}{\mathrm{E}}
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
@@ -142,8 +136,8 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Give an appropriate positive constant \(c\) such that \(f(n) \leq c \cdot
-    g(n)\) for all \(n > 1\).
+    求一个合适的整数 \(c\) ,使得 \(f(n) \leq c \cdot
+    g(n)\) 对 \(n > 1\) 恒成立.
 
     \begin{enumerate}
         \item \(f(n) = n^2 + n + 1\), \(g(n) = 2n^3\)
@@ -151,13 +145,13 @@
         \item \(f(n) = n^2 - n + 1\), \(g(n) = n^2 / 2\)
     \end{enumerate}
 
-    \textbf{Solution}
+    \solution
 
-    We solve each solution algebraically to determine a possible constant
+    显然地, 我们可以通过占卜法来解c的值
     \(c\).
     \\
 
-    \textbf{Part One}
+    \textbf{1.}
 
     \[
         \begin{split}
@@ -171,10 +165,10 @@
         \end{split}
     \]
 
-    Thus a valid \(c\) could be when \(c = 2\).
+    故 \(c = 2\) 满足要求.
     \\
 
-    \textbf{Part Two}
+    \textbf{2.}
 
     \[
         \begin{split}
@@ -192,10 +186,10 @@
         \end{split}
     \]
 
-    Thus a valid \(c\) is \(c = 2\).
+    故 \(c = 2\) 满足要求.
     \\
 
-    \textbf{Part Three}
+    \textbf{3.}
 
     \[
         \begin{split}
@@ -207,20 +201,18 @@
         \end{split}
     \]
 
-    Thus a valid \(c\) is \(c = 2\).
+    故 \(c = 2\) 满足要求.
 
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
-    Let \(\Sigma = \{0, 1\}\). Construct a DFA \(A\) that recognizes the
-    language that consists of all binary numbers that can be divided by 5.
+    令 \(\Sigma = \{0, 1\}\).建立一个有限状态自动机 \(A\) 来识别可以被 5 整除的二进制串.
     \\
 
-    Let the state \(q_k\) indicate the remainder of \(k\) divided by 5. For
-    example, the remainder of 2 would correlate to state \(q_2\) because \(7
-    \mod 5 = 2\).
+    令状态 \(q_k\) 表示\(k\)被5除的余数. 例如,7 对应 \(q_2\) (因为 \(7
+    \mod 5 = 2\) ).
 
     \begin{figure}[h]
         \centering
@@ -247,22 +239,20 @@
                     edge node {0} (q_3)
                     edge [loop below] node {1} (q_4);
         \end{tikzpicture}
-        \caption{DFA, \(A\), this is really beautiful, ya know?}
+        \caption{DFA \  \(A\) \ 真好看, 是不是?}
         \label{fig:multiple5}
     \end{figure}
 
-    \textbf{Justification}
+    \textbf{解释}
     \\
 
-    Take a given binary number, \(x\). Since there are only two inputs to our
-    state machine, \(x\) can either become \(x0\) or \(x1\). When a 0 comes
+    给出一个二进制表示的数, \(x\).由于我们的状态机只接受两种输入, \(x\) can either become \(x0\) or \(x1\). When a 0 comes
     into the state machine, it is the same as taking the binary number and
     multiplying it by two. When a 1 comes into the machine, it is the same as
     multipying by two and adding one.
     \\
 
-    Using this knowledge, we can construct a transition table that tell us
-    where to go:
+    通过这一点, 我们就可以建立出一个转移表:
 
     \begin{table}[ht]
         \centering
@@ -285,7 +275,7 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Write part of \alg{Quick-Sort($list, start, end$)}
+    写出快速排序算法的一部分 \alg{Quick-Sort($list, start, end$)}
 
     \begin{algorithm}[]
         \begin{algorithmic}[1]
@@ -298,16 +288,16 @@
                 \State{} \Call{Quick-Sort}{$list, mid + 1, end$}
             \EndFunction{}
         \end{algorithmic}
-        \caption{Start of QuickSort}
+        \caption{快速排序的开始部分}
     \end{algorithm}
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
-    Suppose we would like to fit a straight line through the origin, i.e.,
-    \(Y_i = \beta_1 x_i + e_i\) with \(i = 1, \ldots, n\), \(\E [e_i] = 0\),
-    and \(\Var [e_i] = \sigma^2_e\) and \(\Cov[e_i, e_j] = 0, \forall i \neq
+    假设我们想要拟合一条过原点的直线, 如,
+    \(Y_i = \beta_1 x_i + e_i\) 其中 \(i = 1, \ldots, n\), \(\E [e_i] = 0\),
+     \(\Var [e_i] = \sigma^2_e\) and \(\Cov[e_i, e_j] = 0, \forall i \neq
     j\).
     \\
 
@@ -471,29 +461,27 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Prove a polynomial of degree \(k\), \(a_kn^k + a_{k - 1}n^{k - 1} + \hdots
-    + a_1n^1 + a_0n^0\) is a member of \(\Theta(n^k)\) where \(a_k \hdots a_0\)
-    are nonnegative constants.
+    证明一个\(k\) 阶的多项式, \(a_kn^k + a_{k - 1}n^{k - 1} + \hdots
+    + a_1n^1 + a_0n^0\) 是 \(\Theta(n^k)\) 的, 其中 \(a_k \hdots a_0\)
+    都是非负常数.
 
     \begin{proof}
-        To prove that \(a_kn^k + a_{k - 1}n^{k - 1} + \hdots + a_1n^1 +
-        a_0n^0\), we must show the following:
+        为了证明 \(a_kn^k + a_{k - 1}n^{k - 1} + \hdots + a_1n^1 +
+        a_0n^0\), 只需证明:
 
         \[
             \exists c_1 \exists c_2 \forall n \geq n_0,\ {c_1 \cdot g(n) \leq
             f(n) \leq c_2 \cdot g(n)}
         \]
 
-        For the first inequality, it is easy to see that it holds because no
-        matter what the constants are, \(n^k \leq a_kn^k + a_{k - 1}n^{k - 1} +
-        \hdots + a_1n^1 + a_0n^0\) even if \(c_1 = 1\) and \(n_0 = 1\).  This
-        is because \(n^k \leq c_1 \cdot a_kn^k\) for any nonnegative constant,
-        \(c_1\) and \(a_k\).
+        对于第一个不等式, 显然它是成立的. 因为无论常数是何值, \(n^k \leq a_kn^k + a_{k - 1}n^{k - 1} +
+        \hdots + a_1n^1 + a_0n^0\) even if \(c_1 = 1\) and \(n_0 = 1\).  
+        这是因为又 \(n^k \leq c_1 \cdot a_kn^k\) 对任意的常数
+        \(c_1\) 和 \(a_k\).
         \\
 
-        Taking the second inequality, we prove it in the following way.
-        By summation, \(\sum\limits_{i=0}^k a_i\) will give us a new constant,
-        \(A\). By taking this value of \(A\), we can then do the following:
+        对于第二个不等式, 我们可以这样证明:
+        记 \(A\) \(=\)  \(\sum\limits_{i=0}^k a_i\) , 则有,
 
         \[
             \begin{split}
@@ -507,32 +495,31 @@
             \end{split}
         \]
 
-        where \(n_0 = 1\) and \(c_2 = A\). \(c_2\) is just a constant. Thus the
-        proof is complete.
+        其中 \(n_0 = 1\) 和 \(c_2 = A\). \(c_2\) 是常数. 这就证明了结论.
     \end{proof}
 \end{homeworkProblem}
 
 \pagebreak
 
 %
-% Non sequential homework problems
+% 编号不连续的情况
 %
 
-% Jump to problem 18
+% 用参数跳到18
 \begin{homeworkProblem}[18]
-    Evaluate \(\sum_{k=1}^{5} k^2\) and \(\sum_{k=1}^{5} (k - 1)^2\).
+    比较 \(\sum_{k=1}^{5} k^2\) 和 \(\sum_{k=1}^{5} (k - 1)^2\).
 \end{homeworkProblem}
 
-% Continue counting to 19
+% 不带参数继续计数(19)
 \begin{homeworkProblem}
-    Find the derivative of \(f(x) = x^4 + 3x^2 - 2\)
+    求 \(f(x) = x^4 + 3x^2 - 2\) 的导数.
 \end{homeworkProblem}
 
-% Go back to where we left off
+% 再次修改参数
 \begin{homeworkProblem}[6]
-    Evaluate the integrals
+    计算定积分
     \(\int_0^1 (1 - x^2) \dx\)
-    and
+    和
     \(\int_1^{\infty} \frac{1}{x^2} \dx\).
 \end{homeworkProblem}
 
