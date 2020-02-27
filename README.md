@@ -13,6 +13,20 @@ https://github.com/jdavis/latex-homework-template
 3. 可调的题号
 4. 常用数学宏
 
+## 依赖与注意事项
+
+需要安装xelatex,Python3以及pygments包(安装方式自行搜索
+推荐使用texlive的最新版本
+需要开启 -shell-escape 参数
+
+## 自动生成脚本
+
+提供了一个Python3脚本(目前仅兼容Windows)自动生成和填入个人信息和课程信息
+
+```
+python auto_gen.py -t "第一次作业" -s "占卜学" -d "t+1"
+```
+
 ## 截图
 
 ### 封面:
@@ -34,15 +48,7 @@ https://github.com/jdavis/latex-homework-template
 ### 例子 5: 可调节的题号
 ![Example problem numbering](/images/latex6.png)
 
-## 安装
 
-需要安装xelatex,Python3以及pygments包
-
-```latex
-
-xelatex -shell-escape homework.tex
-
-```
 
 ## 感谢
 
