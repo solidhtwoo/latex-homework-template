@@ -83,7 +83,7 @@ def main(argv):
 -d, --due= 截止时间, 可以使用today(也可写成t), tomorrow(也可写成to), yesterday(也可写成y), yyyyMMdd,
            如果想表示相对时间, 如today+2表示后天,today-1, 表示昨天(不支持乘除操作).
            其他情况先输入!再输入自定义的时间如!1145141919, 会在文档中原样显示
--s, -d是必选参数
+-t, -d是必选参数
 -i, --instructor 教师姓名(可选, 需要与-c一同使用)
 -c, --class-time 上课时间(可选, 需要与-i一同使用)
 -r, --reset 重置写入到auto_gen_latex.ini文件的配置信息
