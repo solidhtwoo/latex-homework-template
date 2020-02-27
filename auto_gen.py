@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-import sys, getopt, os, datetime,requests
+import sys, getopt, os, datetime, requests, shutil
 from os.path import expanduser
 
 def handle_dates(arg, due_dater):
@@ -88,10 +88,12 @@ def main(argv):
 -c, --class-time 上课时间(可选, 需要与-i一同使用)
 -r, --reset 重置写入到auto_gen_latex.ini文件的配置信息
 --no-test-run 生成之后不测试编译
+--force 如果当前目录下已经有这个文件夹了, 删除后继续
 '''
     test_run_flg = True
+    force_flg = False
     try:
-        opts, args = getopt.getopt(argv,"ht:s:d:r:i:c:f:",["title=","sub=","due=","help","reset","no-test-run","instructor","class-time","finish-time"])
+        opts, args = getopt.getopt(argv,"ht:s:d:r:i:c:f:",["title=","sub=","due=","help","reset","no-test-run","instructor","class-time","finish-time","force"])
     except getopt.GetoptError:
         print(hp)
         sys.exit(2)
@@ -122,31 +124,46 @@ def main(argv):
         elif opt in ("-r", "--reset"):
             init_conf(file_path)
             sys.exit()
+        elif opt == '--force' :
+            force_flg = True
         else :    
             print(opt)
             sys.exit(2)
     if (os.path.exists(file_path) == False) :
         print("配置文件不存在!, 要现在初始化吗?(Y/N)")
         option = input()
-        while option not in ("Y","N","Yes","No") :
+        while option not in ("Y","N","Yes","No","y","n") :
             print("配置文件不存在!, 要现在初始化吗?(Y/N)")
             option = input()
-            if (option in ("Y", "Yes")) :
+            if (option in ("Y", "Yes","y")) :
                 init_conf(file_path)
                 break
     if (class_namer == '}') :
         dir = os.getcwd().split("\\")[-1]
         class_namer = dir + class_namer
     if (titler[0] == '}' or class_namer =='}' or due_dater == '}') :
-        print("-t, -s, -d 必须给出, 请检查")
+        print("-t, -d 必须给出, 请检查")
         sys.exit(2)
     if ((len(instructorl) == chk_len_ins) ^ (chk_len_ct == len(class_timel))) :
         print("-i, -c 必须同时给出, 请检查")
         sys.exit(2)
     # 开始整活
-    os.mkdir(titler[:len(titler) - 1])
+    dir_lst = os.listdir(os.getcwd())
+    dir_name = titler[:len(titler) - 1]
+    print(dir_name)
+    if (dir_name in dir_lst) :
+        if (force_flg) :
+            shutil.rmtree(dir_name)
+        else :
+            print("这个目录已经有了, 是否删除原来的目录?(Y/N)")
+            option = input()
+            if (option in ("Yes","Y","YES","y")) :
+                shutil.rmtree(dir_name)
+            else :
+                sys.exit()
+    os.mkdir(dir_name)
     hm_url = "https://raw.githubusercontent.com/solidhtwoo/latex-homework-template-chinese/master/homework.tex"
-    os.chdir(titler[:len(titler) - 1])
+    os.chdir(dir_name)
     with open("homework.tex","w", encoding='utf-8') as hm :
         tmp = requests.get(hm_url)
         tmp.encoding = 'utf-8'
