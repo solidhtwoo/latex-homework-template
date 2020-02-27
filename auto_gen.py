@@ -25,6 +25,7 @@ def handle_dates(arg, due_dater):
         due_dater = str(int(arg[0 : 4])) +" \\ 年 \\ " + str(int(arg[4 : 6])) + " \\ 月 \\ " + str(int(arg[6 : 8])) + " \\ 日 " + due_dater
     print(due_dater)
     return due_dater
+
 def init_conf(path):
     author_idl = "\\newcommand{\\hmwkAuthorID}{"
     author_classl = "\\newcommand{\\hmwkAuthorClass}{"
@@ -70,10 +71,11 @@ def main(argv):
     finish_time = "\\date{"
     hp = '''
 文档生成器,用于生成填好个人信息的文档
+会自动在用户目录下生成一个"auto_gen_latex.ini"文件, 用于保存学号, 姓名和班级
 参数:
 -h, --help 显示帮助 
--t, --title= 作业标题
--s, --sub= 科目
+-t, --title= 作业标题, 会自动在以这个为标题的目录下生成文件
+-s, --sub= 科目,不加这个参数的话默认获取当前工作目录的名字
 -f, --finish-time 署名下的日期,一般是完成日期, 默认生成为今天, 
            可以使用today(也可写成t), tomorrow(也可写成to), yesterday(也可写成y), yyyyMMdd,
            如果想表示相对时间, 如today+2表示后天,today-1, 表示昨天(不支持乘除操作).
@@ -81,10 +83,10 @@ def main(argv):
 -d, --due= 截止时间, 可以使用today(也可写成t), tomorrow(也可写成to), yesterday(也可写成y), yyyyMMdd,
            如果想表示相对时间, 如today+2表示后天,today-1, 表示昨天(不支持乘除操作).
            其他情况先输入!再输入自定义的时间如!1145141919, 会在文档中原样显示
--t, -s, -d是必选参数
+-s, -d是必选参数
 -i, --instructor 教师姓名(可选, 需要与-c一同使用)
 -c, --class-time 上课时间(可选, 需要与-i一同使用)
--r, --reset 重置写入到用户文件的配置信息
+-r, --reset 重置写入到auto_gen_latex.ini文件的配置信息
 --no-test-run 生成之后不测试编译
 '''
     test_run_flg = True
@@ -132,6 +134,9 @@ def main(argv):
             if (option in ("Y", "Yes")) :
                 init_conf(file_path)
                 break
+    if (class_namer == '}') :
+        dir = os.getcwd().split("\\")[-1]
+        class_namer = dir + class_namer
     if (titler[0] == '}' or class_namer =='}' or due_dater == '}') :
         print("-t, -s, -d 必须给出, 请检查")
         sys.exit(2)
