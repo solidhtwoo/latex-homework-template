@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-import sys, getopt, os, datetime, requests, shutil
+import sys, getopt, os, datetime, requests, shutil, platform, time,webbrowser
 from os.path import expanduser
-
+sys_type = "Windows"
 def handle_dates(arg, due_dater):
     cur_time = datetime.datetime.today()
     if (arg[0] == '!') :
@@ -32,10 +32,13 @@ def init_conf(path):
     author_namel = "\\newcommand{\\hmwkAuthorName}{"
     print("您的姓名?")
     author_namer = input() + "}"
+    print(author_namer)
     print("您的学号?")
     author_idr = input() + "}"
     print("您所在的班级?")
     author_classr = input() + "}"
+    if os.path.exists(path) == False and sys_type != "Windows":
+        os.system("touch " + path)
     with open(path, 'w', encoding='utf-8') as fi:
         fi.write(author_classl + author_classr + '\n')
         fi.write(author_idl + author_idr + '\n')
@@ -57,6 +60,9 @@ def get_date(val) :
     else :
         assert(len(val) == 8)
         return datetime.datetime.fromisoformat(val[0 : 4] + '-' + val[4 : 6] + '-' + val[6 : 8])
+
+path_delimitator = "\\"
+profile_name = "auto_gen_latex.ini"
 def main(argv):
     titlel = "\\newcommand{\\hmwkTitle}{"
     titler = "}"
@@ -72,6 +78,7 @@ def main(argv):
     hp = '''
 文档生成器,用于生成填好个人信息的文档
 会自动在用户目录下生成一个"auto_gen_latex.ini"文件, 用于保存学号, 姓名和班级
+(在linux下是.auto_gen_latex)
 参数:
 -h, --help 显示帮助 
 -t, --title= 作业标题, 会自动在以这个为标题的目录下生成文件
@@ -90,6 +97,7 @@ def main(argv):
 --no-test-run 生成之后不测试编译
 --force 如果当前目录下已经有这个文件夹了, 删除后继续
 '''
+    
     test_run_flg = True
     force_flg = False
     try:
@@ -100,7 +108,11 @@ def main(argv):
     if len(opts) == 0 :
         print(hp)
         sys.exit()
-    file_path = expanduser("~") + "\\auto_gen_latex.ini"
+    sys_type = platform.system()
+    if (sys_type != "Windows") :
+        path_delimitator = "/"
+        profile_name = ".auto_gen_latex"
+    file_path = expanduser("~") + path_delimitator + profile_name
     for opt, arg in opts:
         if opt in ("-i", "--instructor") :
             instructorl = instructorl[:len(instructorl) - 1] + arg + "}"
@@ -129,9 +141,10 @@ def main(argv):
         else :    
             print(opt)
             sys.exit(2)
+    time.sleep(1)
+    sys.stdout.flush()
     if (os.path.exists(file_path) == False) :
-        print("配置文件不存在!, 要现在初始化吗?(Y/N)")
-        option = input()
+        option = ""
         while option not in ("Y","N","Yes","No","y","n") :
             print("配置文件不存在!, 要现在初始化吗?(Y/N)")
             option = input()
@@ -139,7 +152,7 @@ def main(argv):
                 init_conf(file_path)
                 break
     if (class_namer == '}') :
-        dir = os.getcwd().split("\\")[-1]
+        dir = os.getcwd().split(path_delimitator)[-1]
         class_namer = dir + class_namer
     if (titler[0] == '}' or class_namer =='}' or due_dater == '}') :
         print("-t, -d 必须给出, 请检查")
@@ -182,5 +195,6 @@ def main(argv):
             fo.write(finish_time + "\n")
     if(test_run_flg) :
         print(os.system("latexmk -xelatex -latexoption=-file-line-error -latexoption=-interaction=nonstopmode -latexoption=-shell-escape homework.tex"))
+        webbrowser.open("file://"+ os.getcwd() + path_delimitator + "homework.pdf")
 if __name__ == "__main__":
    main(sys.argv[1:])
