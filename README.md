@@ -21,33 +21,11 @@ https://github.com/jdavis/latex-homework-template
 
 ## 自动生成脚本
 
-提供了一个Python3脚本(目前仅兼容Windows)自动生成和填入个人信息和课程信息
+提供了一个Python3脚本(Windows/Linux)自动生成和填入个人信息和课程信息
 
 ```
 python auto_gen.py -t "第一次作业" -s "占卜学" -d "t+1"
 ```
-
-## 截图
-
-### 封面:
-
-![Cover page](/images/latex1.png)
-
-### 例子 1 :
-![Example problems 1](/images/latex2.png)
-
-### 例子 2: 自动机, 伪代码, 代码高亮
-![Example problems 2](/images/latex3.png)
-
-### 例子 3: 统计学
-![Example problems 3](/images/latex4.png)
-
-### 例子 4: 证明题
-![Example problems 4](/images/latex5.png)
-
-### 例子 5: 可调节的题号
-![Example problem numbering](/images/latex6.png)
-
 
 
 ## 感谢
